@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- using properties file -->
+    <context:annotation-config/>
+    <context:property-placeholder location="app.properties"/>
+
+    <bean name="customerRepository" class="com.girish.repository.HibernateCustomerRepository">
+        <!--<property name="dbusername" value="${dbusername}"/>-->
+    </bean>
+
+    <!-- for Autowiring a bean... use autowire in the <bean> tag
+    and choose the options like "constructor", "byName",
+    "byType", "no" -->
+    <bean name="customerService" class="com.girish.service.CustomerServiceImpl" autowire="constructor">
+
+        <!-- for setter injection -->
+        <!--<property name="repository" ref="customerRepository"/>-->
+
+        <!-- for Constructor injection -->
+        <!--<constructor-arg index="0" ref="customerRepository"/>-->
+    </bean>
+
+</beans>
